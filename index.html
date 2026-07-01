@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valorant Match Request</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Layer -->
+  <div class="bg-grid"></div>
+  <div class="bg-scanline"></div>
+
+  <!-- Decorative Corner Brackets -->
+  <div class="corner-brackets">
+    <div class="corner-bracket bracket-tl"></div>
+    <div class="corner-bracket bracket-tr"></div>
+    <div class="corner-bracket bracket-bl"></div>
+    <div class="corner-bracket bracket-br"></div>
+  </div>
+
+  <!-- Audio Control Widget -->
+  <div class="audio-control" id="audioToggle" title="Toggle audio cues">
+    <svg class="audio-icon" id="audioIcon" viewBox="0 0 24 24">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.5L6.5 13H9V9h4v4h2.5L11 17.5zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+    </svg>
+    <span id="audioStatus">SFX: ON</span>
+  </div>
+
+  <!-- Main Lobby Invitation Card -->
+  <div class="lobby-container" id="lobbyCard">
+    <div class="lobby-header">
+      <div class="channel-status">SECURE TRANSMISSION // VAL-INVITE</div>
+      <h1 class="card-title">Do you want to play <span>Valorant</span> this Weekend?</h1>
+    </div>
+
+    <!-- Valorant style custom SVG graphic -->
+    <div class="lobby-art">
+      <svg class="lobby-art-svg" viewBox="0 0 100 100">
+        <!-- Background decorative diamond -->
+        <polygon points="50,5 95,50 50,95 5,50" fill="none" stroke="rgba(255, 70, 85, 0.15)" stroke-width="1" />
+        <polygon points="50,15 85,50 50,85 15,50" fill="none" stroke="rgba(236, 232, 225, 0.05)" stroke-width="1.5" stroke-dasharray="5 5" />
+        
+        <!-- Valorant-like Logo Left Slash -->
+        <path d="M 30,22 C 30,22 45,22 45,22 L 25,78 L 15,78 Z" fill="var(--valorant-red)" />
+        <!-- Valorant-like Logo Right Slash and Cut -->
+        <path d="M 85,22 L 55,22 L 35,68 L 45,68 Z" fill="var(--valorant-red)" />
+        <polygon points="50,78 60,78 63,70 53,70" fill="var(--valorant-red)" />
+        
+        <!-- Subtle crosshair coordinates -->
+        <line x1="50" y1="5" x2="50" y2="25" stroke="rgba(236, 232, 225, 0.2)" stroke-width="1" />
+        <line x1="50" y1="75" x2="50" y2="95" stroke="rgba(236, 232, 225, 0.2)" stroke-width="1" />
+        <line x1="5" x2="25" y1="50" y2="50" stroke="rgba(236, 232, 225, 0.2)" stroke-width="1" />
+        <line x1="75" x2="95" y1="50" y2="50" stroke="rgba(236, 232, 225, 0.2)" stroke-width="1" />
+      </svg>
+    </div>
+
+    <div class="lobby-body">
+      <p class="subtitle">ESTABLISHING CONNECTION... LOBBY STATUS: WAITING</p>
+      
+      <!-- Interactive Buttons -->
+      <div class="button-group">
+        <button class="btn-val btn-yes" id="yesBtn">Yes</button>
+        <button class="btn-val btn-no" id="noBtn">No</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SYSTEM ERROR OVERLAY ("No" button fallback) -->
+  <div class="error-overlay" id="errorOverlay">
+    <div class="error-banner">
+      <div class="error-banner-content">
+        <div class="error-title">SYSTEM ERROR</div>
+        <div class="error-subtitle">Wrong answer, choose again!</div>
+      </div>
+    </div>
+    <button class="error-dismiss-btn" id="dismissErrorBtn">DISMISS & RE-LOCK</button>
+  </div>
+
+  <!-- VICTORY SCREEN (Success) -->
+  <div class="victory-screen" id="victoryScreen">
+    <!-- Canvas for confetti/particle celebration -->
+    <canvas class="confetti-canvas" id="confettiCanvas"></canvas>
+
+    <div class="victory-banner">
+      <div class="victory-text">VICTORY</div>
+      <div class="victory-subtitle">MATCH LOCKED IN // SYSTEM SYNC COMPLETE</div>
+    </div>
+
+    <!-- Match stats and agent summary card -->
+    <div class="victory-card">
+      <div class="victory-img-container">
+        <!-- Chibi Illustration of Jett & Phoenix -->
+        <img class="victory-img" src="victory_chibi.jpg" alt="Valorant Match Success">
+      </div>
+
+      <table class="victory-stats">
+        <tr>
+          <td class="stats-label">LOBBY MATCHMAKER</td>
+          <td class="stats-value highlight">VALORANT PLAY DATE</td>
+        </tr>
+        <tr>
+          <td class="stats-label">TARGET MAP</td>
+          <td class="stats-value">BINDING AGREEMENT (OUR COMPUTERS)</td>
+        </tr>
+        <tr>
+          <td class="stats-label">SCHEDULED START</td>
+          <td class="stats-value cyan">THIS WEEKEND</td>
+        </tr>
+        <tr>
+          <td class="stats-label">LOBBY PERFORMANCE</td>
+          <td class="stats-value">MVP / 100% MATCH WIN RATE</td>
+        </tr>
+        <tr>
+          <td class="stats-label">PLAYDATE DECISION</td>
+          <td class="stats-value highlight">YES (LOCKED IN)</td>
+        </tr>
+      </table>
+
+      <!-- VC Option Section -->
+      <div class="vc-section" style="width: 100%; margin-top: 20px; text-align: center;">
+        <button class="btn-val" id="vcBtn" style="background-color: var(--gold); color: #0f1923; width: 100%; font-size: 16px;">Before it, VC as well?</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

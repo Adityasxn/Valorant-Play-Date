@@ -1,0 +1,672 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Share+Tech+Mono&family=Teko:wght@500;700&family=Inter:wght@400;600&display=swap');
+
+:root {
+  --bg-color: #0f1923;
+  --bg-secondary: #17212b;
+  --valorant-red: #ff4655;
+  --valorant-red-hover: #ff5c6b;
+  --text-light: #ece8e1;
+  --text-muted: #8b949e;
+  --gold: #ffb800;
+  --cyan: #00f0ff;
+  --font-display: 'Teko', sans-serif;
+  --font-tactical: 'Share Tech Mono', monospace;
+  --font-header: 'Oswald', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-light);
+  font-family: var(--font-body);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Tactical Grid & Ambient Background */
+.bg-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(23, 33, 43, 0.5) 0%, rgba(15, 25, 35, 1) 100%),
+    linear-gradient(rgba(255, 70, 85, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 70, 85, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 30px 30px, 30px 30px;
+  z-index: 1;
+}
+
+/* Subtle scanning line overlay */
+.bg-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Valorant-style corner brackets for aesthetic */
+.corner-brackets {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.corner-bracket {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(236, 232, 225, 0.1);
+}
+
+.bracket-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; border-top-width: 2px; border-left-width: 2px; border-color: var(--valorant-red); }
+.bracket-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; border-top-width: 2px; border-right-width: 2px; }
+.bracket-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; border-bottom-width: 2px; border-left-width: 2px; }
+.bracket-br { bottom: 20px; right: 20px; border-left: none; border-top: none; border-bottom-width: 2px; border-right-width: 2px; border-color: var(--valorant-red); }
+
+/* Main Card Container */
+.lobby-container {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 550px;
+  background-color: var(--bg-secondary);
+  border: 1px solid rgba(236, 232, 225, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 70, 85, 0.05);
+  padding: 40px;
+  text-align: center;
+  transition: all 0.3s ease;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%);
+}
+
+.lobby-header {
+  margin-bottom: 30px;
+}
+
+.channel-status {
+  font-family: var(--font-tactical);
+  font-size: 11px;
+  color: var(--valorant-red);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.channel-status::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--valorant-red);
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+.card-title {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--text-light);
+  letter-spacing: 1px;
+}
+
+.card-title span {
+  color: var(--valorant-red);
+}
+
+.lobby-art {
+  margin: 25px 0;
+  position: relative;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Valorant Logo Mark/Slogan Vibe */
+.lobby-art-svg {
+  width: 140px;
+  height: 140px;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 15px rgba(255, 70, 85, 0.4));
+  animation: pulse 4s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+.lobby-body {
+  margin-bottom: 30px;
+}
+
+.subtitle {
+  font-family: var(--font-tactical);
+  font-size: 14px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+}
+
+/* Button Layout */
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+  min-height: 65px;
+}
+
+/* Valorant Themed Action Buttons */
+.btn-val {
+  font-family: var(--font-header);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 14px 40px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+  min-width: 160px;
+  color: #0f1923;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+}
+
+.btn-val::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.btn-val:hover::before {
+  left: 100%;
+}
+
+.btn-val:active {
+  transform: scale(0.95);
+}
+
+.btn-yes {
+  background-color: var(--valorant-red);
+  color: #fff;
+  border-left: 4px solid var(--text-light);
+  box-shadow: 0 4px 15px rgba(255, 70, 85, 0.4);
+}
+
+.btn-yes:hover {
+  background-color: var(--valorant-red-hover);
+  box-shadow: 0 4px 20px rgba(255, 70, 85, 0.6);
+}
+
+/* Stationary override when Yes has run away 5 times */
+.btn-yes.no-evade {
+  position: static !important;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.btn-no {
+  background-color: transparent;
+  color: var(--text-light);
+  border: 1px solid rgba(236, 232, 225, 0.3);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+}
+
+.btn-no:hover {
+  background-color: rgba(236, 232, 225, 0.05);
+  border-color: var(--text-light);
+}
+
+/* Evading active state */
+.btn-yes.evading {
+  position: fixed;
+  z-index: 1000;
+  transition: all 0.15s ease;
+}
+
+/* Overlay Screen for "Wrong Answer" */
+.error-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 25, 35, 0.95);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.error-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.error-banner {
+  background-color: var(--valorant-red);
+  color: #fff;
+  width: 100%;
+  padding: 25px 0;
+  text-align: center;
+  transform: skewY(-2deg);
+  box-shadow: 0 0 30px rgba(255, 70, 85, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.error-banner-content {
+  transform: skewY(2deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-title {
+  font-family: var(--font-display);
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  line-height: 1;
+  text-transform: uppercase;
+  animation: glitch 1s infinite alternate;
+}
+
+.error-subtitle {
+  font-family: var(--font-tactical);
+  font-size: 18px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.error-dismiss-btn {
+  margin-top: 40px;
+  background-color: var(--text-light);
+  color: var(--bg-color);
+  font-family: var(--font-header);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 12px 30px;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  transition: background-color 0.2s;
+}
+
+.error-dismiss-btn:hover {
+  background-color: #fff;
+}
+
+/* Glitch Animation */
+@keyframes glitch {
+  0% { transform: translate(0); text-shadow: none; }
+  20% { transform: translate(-2px, 2px); text-shadow: 2px 0 var(--cyan), -2px 0 var(--valorant-red); }
+  40% { transform: translate(-2px, -2px); text-shadow: -2px 0 var(--cyan), 2px 0 var(--valorant-red); }
+  60% { transform: translate(2px, 2px); text-shadow: 2px 0 var(--cyan), -2px 0 var(--valorant-red); }
+  80% { transform: translate(2px, -2px); text-shadow: -2px 0 var(--cyan), 2px 0 var(--valorant-red); }
+  100% { transform: translate(0); text-shadow: none; }
+}
+
+/* Victory Screen (SUCCESS SCREEN) */
+.victory-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(23, 33, 43, 0.4) 0%, rgba(15, 25, 35, 1) 100%),
+    linear-gradient(rgba(255, 184, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 184, 0, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  overflow-y: auto;
+  padding: 40px 20px;
+}
+
+.victory-screen.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Banner like Valorant VICTORY match screen */
+.victory-banner {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  position: relative;
+  margin-bottom: 30px;
+  animation: bannerSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bannerSlideIn {
+  0% { transform: scaleY(0); opacity: 0; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+
+.victory-banner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 90px;
+  background: linear-gradient(90deg, transparent, rgba(255, 184, 0, 0.15), transparent);
+  filter: blur(15px);
+  z-index: -1;
+}
+
+.victory-text {
+  font-family: var(--font-display);
+  font-size: 110px;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(255, 184, 0, 0.4), 0 0 2px #fff;
+  letter-spacing: 8px;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.victory-subtitle {
+  font-family: var(--font-tactical);
+  font-size: 16px;
+  color: var(--text-light);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+/* Content Container for Victory Card */
+.victory-card {
+  width: 90%;
+  max-width: 600px;
+  background-color: var(--bg-secondary);
+  border: 1px solid rgba(255, 184, 0, 0.2);
+  border-top: 4px solid var(--gold);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 50px rgba(255, 184, 0, 0.05);
+  animation: cardFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes cardFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.victory-img-container {
+  width: 100%;
+  max-width: 320px;
+  height: 200px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 25px;
+  position: relative;
+  background-color: #0c141d;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.victory-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  transition: transform 0.5s;
+}
+
+.victory-img:hover {
+  transform: scale(1.05);
+}
+
+/* Stats / Details Table Grid */
+.victory-stats {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 25px;
+  font-family: var(--font-tactical);
+}
+
+.victory-stats tr {
+  border-bottom: 1px solid rgba(236, 232, 225, 0.08);
+}
+
+.victory-stats tr:last-child {
+  border-bottom: none;
+}
+
+.victory-stats td {
+  padding: 10px 5px;
+  font-size: 14px;
+}
+
+.stats-label {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.stats-value {
+  color: var(--text-light);
+  font-weight: bold;
+  text-align: right;
+}
+
+.stats-value.highlight {
+  color: var(--gold);
+}
+
+.stats-value.cyan {
+  color: var(--cyan);
+}
+
+/* Form inputs for discord details */
+.rsvp-section {
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.rsvp-label {
+  display: block;
+  font-family: var(--font-tactical);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.discord-input-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.discord-input {
+  background-color: rgba(15, 25, 35, 0.8);
+  border: 1px solid rgba(236, 232, 225, 0.2);
+  color: var(--text-light);
+  padding: 10px 15px;
+  font-family: var(--font-tactical);
+  font-size: 14px;
+  outline: none;
+  width: 60%;
+  transition: border-color 0.2s;
+}
+
+.discord-input:focus {
+  border-color: var(--gold);
+}
+
+.btn-rsvp {
+  background-color: var(--gold);
+  color: #0f1923;
+  font-family: var(--font-header);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-rsvp:hover {
+  background-color: #ffe066;
+}
+
+.btn-rsvp:active {
+  transform: scale(0.96);
+}
+
+/* Success status feedback */
+.rsvp-success-message {
+  font-family: var(--font-tactical);
+  color: var(--cyan);
+  margin-top: 12px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: none;
+  animation: blink 2s infinite;
+}
+
+/* Audio Mute/Unmute Widget */
+.audio-control {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 50;
+  background-color: rgba(23, 33, 43, 0.6);
+  border: 1px solid rgba(236, 232, 225, 0.1);
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-tactical);
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%);
+}
+
+.audio-control:hover {
+  border-color: rgba(236, 232, 225, 0.3);
+  color: var(--text-light);
+}
+
+.audio-icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* Particle Canvas for victory effect */
+.confetti-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 199;
+  pointer-events: none;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .victory-text {
+    font-size: 70px;
+  }
+  .card-title {
+    font-size: 26px;
+  }
+  .lobby-container {
+    padding: 30px 20px;
+  }
+  .button-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .btn-val {
+    width: 100%;
+  }
+  .discord-input-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .discord-input {
+    width: 100%;
+  }
+  .btn-rsvp {
+    width: 100%;
+  }
+}
