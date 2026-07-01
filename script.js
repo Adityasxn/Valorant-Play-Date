@@ -207,6 +207,12 @@ yesBtn.addEventListener('touchstart', (e) => {
 
 // Click Event for YES (Victory Trigger)
 yesBtn.addEventListener('click', () => {
+  // Prevent early clicking (e.g. keyboard navigation or ultra-fast clicks)
+  if (hoverCount < MAX_EVADES) {
+    moveYesButton();
+    return;
+  }
+
   playSound('victory');
   victoryScreen.classList.add('active');
   startConfetti();
